@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class Main1 {
+public class Main2 {
     public static void main(String... args) {
         List<Integer> left = new ArrayList<>();
         List<Integer> right = new ArrayList<>();
@@ -22,23 +24,27 @@ public class Main1 {
             e.printStackTrace();
         }
 
-        left.sort(Comparator.naturalOrder());
-        right.sort(Comparator.naturalOrder());
-
-        int distance = 0;
-        for(int i = 0; i < left.size(); i++) {
-            
-            int delta = right.get(i) - left.get(i);
-
-            // It's OK to be paranoic
-            if (delta < 0) {
-                System.out.println("Negative delta: " + delta);
-                delta = Math.abs(delta);
-            }
-
-            distance = distance + delta;
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i < right.size(); i++) {
+            int x = right.get(i);
+            int value = map.getOrDefault(x, 0);
+            map.put(x, value + 1);
         }
 
-        System.out.println("Distance: " + distance);
+        int similarity = 0;
+        for(int i = 0; i < left.size(); i++) {
+            
+            int x = left.get(i);
+            int count = map.getOrDefault(x, 0);
+
+            // It's OK to be paranoic
+            if (count < 0) {
+                System.out.println("Missing value: " + x);
+            }
+
+            similarity = similarity + x * count;
+        }
+
+        System.out.println("Similarity: " + similarity);
     }
 }
