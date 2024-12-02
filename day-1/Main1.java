@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main1 {
     public static void main(String... args) {
         List<Integer> left = new ArrayList<>();
         List<Integer> right = new ArrayList<>();
