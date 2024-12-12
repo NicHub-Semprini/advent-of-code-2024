@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class Main71 {
+public class Main72 {
     public static void main(String... args) {
         Map<Long, List<Long>> inputMap = new HashMap<>();
 
@@ -99,6 +99,7 @@ public class Main71 {
     public enum Operation {
         SUM("+"),
         MUL("*"),
+        CONCAT("||"),
         ;
 
         public final String symbol;
@@ -116,6 +117,7 @@ public class Main71 {
             return switch (this) {
                 case SUM -> x + y;
                 case MUL -> x * y;
+                case CONCAT -> Long.parseLong(x.toString() + y.toString());
             };
         }
     }
